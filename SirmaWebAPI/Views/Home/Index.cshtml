@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="FileUpload">
+        <div class="form-group">
+            <div class="col-md-10">
+                <p>Upload one txt file using this form:</p>
+                <input type="file" name="file" accept=".txt" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Upload" />
+            </div>
+        </div>
+    </form>
+
+</div>
+@if (ViewBag.GroupedEmps != null && ViewBag.GroupedEmps.Count > 0)
+{
+    <table cellpadding="10">
+        <tr>
+            <th>Employee ID #1</th>
+            <th>Employee ID #2</th>
+            <th>Project ID</th>
+            <th>Days worked</th>
+        </tr>
+        @foreach (GroupedProject project in ViewBag.GroupedEmps)
+        {
+            <tr>
+                <td>@project.Emps.First().EmpID</td>
+                <td>@project.Emps.Last().EmpID</td>
+                <td>@project.ProjectID</td>
+                <td>@project.OverLappedDays</td>
+            </tr>
+        }
+    </table>
+}
